@@ -26,7 +26,7 @@ steps:
 
 - bash: |
     chromedriver --version
-    robot --pythonpath . -x 'outputxunit.xml' '**/AmazonProject/tests/searchProductTests.robot'
+    robot --pythonpath . -x 'outputxunit.xml' '**/searchProductTests.robot'
   displayName: 'Run Tests'
 
 - task: PublishTestResults@2
