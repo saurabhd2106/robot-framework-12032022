@@ -1,0 +1,35 @@
+# Python package
+# Create and test a Python package on multiple Python versions.
+# Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/python
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-latest
+strategy:
+  matrix:
+    Python37:
+      python.version: '3.7'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.7)'
+  displayName: 'Use Python $(python.version)'
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install robotframework robotframework-seleniumlibrary
+  displayName: 'Install dependencies'
+
+- bash: |
+    chromedriver --version
+    robot --pythonpath . -x 'outputxunit.xml' '**/AmazonProject/tests/searchProductTests.robot'
+  displayName: 'Run Tests'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/output*.xml'
