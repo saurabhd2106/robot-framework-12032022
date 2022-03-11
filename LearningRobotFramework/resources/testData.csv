@@ -1,0 +1,3 @@
+*** Test Cases ***,${firstname},${lastname},${email},${phoneNumber},${course}
+TC#1,Saurabh,Dhingra,saurabh@fake.com,574656,Cypress
+TC#2,Gaurav,Yadav,gaurav@fake.com,47567843,Selenium
